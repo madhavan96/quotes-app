@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Qoute Generator</title>
+        <style>
+            #capture {
+                width: 550px;
+                margin: auto;
+                margin-top: 100px;
+            }
+            .quote-img {
+                width: 550px;
+                height: auto;
+                margin: auto;
+                display: block;
+            }
+
+            .post-text{
+                position: absolute;
+                top: 248px;
+                width: 278px;
+                text-align: center;
+                padding: 0px 16px;
+                color: white;
+                font-size: 26px;
+            }
+
+            .action-control {
+                text-align: center;
+                margin-top: 60px;
+            }
+
+        </style>
+        <script>
+            const downloadImg = ()=>{
+               
+                html2canvas(document.querySelector("#capture"),{
+                    scale: 2,
+                    allowTaint: true, useCORS: true, foreignObjectRendering: true
+                }).then(canvas => {
+                    var a = document.createElement('a');
+                    a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+                    a.download = 'quote.jpg';
+                    //a.click();
+                });
+            }
+           
+            const updateText = ()=>{
+                document.querySelector('.post-text').innerText = document.querySelector("#quoteText").value
+            }
+
+        </script>
+    </head>
+    
+    <body>
+            <div>
+
+            </div>
+            <div id="capture">
+                <img class="quote-img" src="./quote-generator.jpeg"  />
+                <p class="post-text">[text here]</p>
+            </div>
+            <div class="action-control">
+                <textarea id="quoteText" rows="4" style="width: 400px;" oninput="updateText()"></textarea> <br/><br/>
+                <button onclick="downloadImg()">Download</button>
+            </div>
+    </body>
+    <footer>
+        <script src="./html2canvas.min.js"></script>
+    </footer>
+</html>
